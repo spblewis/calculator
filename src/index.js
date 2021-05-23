@@ -2,69 +2,42 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const digits = [
-    {
-        "name": "zero",
-        "value": 0
-    },
-    {
-        "name": "one",
-        "value": 1
-    },
-    {
-        "name": "two",
-        "value": 2
-    },
-    {
-        "name": "three",
-        "value": 3
-    },
-    {
-        "name": "four",
-        "value": 4
-    },
-    {
-        "name": "five",
-        "value": 5
-    },
-    {
-        "name": "six",
-        "value": 6
-    },
-    {
-        "name": "seven",
-        "value": 7
-    },
-    {
-        "name": "eight",
-        "value": 8
-    },
-    {
-        "name": "nine",
-        "value": 9
+class KeyPad extends React.Component {
+
+    render() {
+
+        return (
+
+            <div>
+                <button id="seven">7</button>
+                <button id="eight">8</button>
+                <button id="nine">9</button>
+
+                <button id="four">4</button>
+                <button id="five">5</button>
+                <button id="six">6</button>
+
+                <button id="one">1</button>
+                <button id="two">2</button>
+                <button id="three">3</button>
+
+                <button id="zero">0</button>
+                
+                <button id="equals">=</button>
+
+            </div>
+
+        )
+
     }
-]
-const operators = [
-    {
-        "name": "add"
-    },
-    {
-        "name": "subtract"
-    },
-    {
-        "name": "multiply"
-    },
-    {
-        "name": "divide"
-    }
-]
+}
 
 class Calculator extends React.Component {
 
     render(){
 
     return (
-        <h1>initial</h1>
+        <KeyPad />
     );
 
     };
