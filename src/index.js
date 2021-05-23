@@ -8,7 +8,7 @@ class KeyPad extends React.Component {
 
         return (
 
-            <div>
+            <div id="key-pad">
 
                 <button id="clear">AC</button>
                 <button id="divide">/</button>
