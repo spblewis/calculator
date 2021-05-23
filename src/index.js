@@ -44,6 +44,20 @@ const digits = [
         "value": 9
     }
 ]
+const operators = [
+    {
+        "name": "add"
+    },
+    {
+        "name": "subtract"
+    },
+    {
+        "name": "multiply"
+    },
+    {
+        "name": "divide"
+    }
+]
 
 class Calculator extends React.Component {
 
