@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    padding: 0
+    padding: 0;
+    font-size: 2em;
 }
 
 #root {
@@ -14,12 +15,38 @@ body {
 
 }
 
+
+#display {
+    text-align: right;
+}
+
+
 #key-pad {
     display: grid;
-    grid-template-columns: 100px 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px 100px;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(5, 100px);
+}
+
+button {
+    font-size: 1em; 
 }
 
 #clear {
-    
+    background-color: red;
+    color: white;
+    grid-column: 1 / 3;
+}
+
+#equals {
+    grid-row: 4 / 6;
+    grid-column: 4 / 5;
+}
+
+#zero {
+    grid-column: 1 / 3;
+}
+
+#equals {
+    background-color: forestgreen;
+    color: white
 }
