@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
 body {
     margin: 0;
     padding: 0;
-    font-size: 2em;
+    font-size: 1.5em;
+    background-color: lightseagreen;
 }
 
 #root {
@@ -12,23 +15,37 @@ body {
 }
 
 #calculator {
-
+    padding: 10px;
+    background-color: slategrey;
 }
 
 
 #display {
+    font-family: 'Orbitron', sans-serif;
+    max-width: 310px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    padding: 5px;
     text-align: right;
+    background-color: lightsteelblue;
+    overflow: hidden;
+}
+
+#display-align {
+    float: right;
 }
 
 
 #key-pad {
     display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: repeat(5, 100px);
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: repeat(5, 80px);
 }
 
 button {
-    font-size: 1em; 
+    font-size: 1em;
+    background-color: lightgrey;
 }
 
 #clear {

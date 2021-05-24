@@ -71,7 +71,7 @@ class Display extends React.Component {
 
         return (
 
-            <div id="display">{this.props.equation}</div>
+            <div id="display"><span id="display-align">{this.props.equation}</span></div>
 
         )
 
