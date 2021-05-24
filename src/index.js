@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
     function lastCharIsOperator(str) {
-        return str[str.length-1].match(/[+\*-\/]/);
+        return str[str.length-1].match(/[+\*\-\/]/);
     }
 
 
@@ -76,6 +76,12 @@ class Calculator extends React.Component {
                 'equation': val
             });
 
+        } else if (lastCharIsOperator(equation)) {
+        
+            this.setState({
+                'equation': equation + ' ' + val
+            })
+        
         } else {
 
             this.setState({
@@ -95,6 +101,18 @@ class Calculator extends React.Component {
             });
         }
     }
+
+    handleDecimal(val, equation) {
+        if (lastCharIsOperator(equation)) {
+            this.setState({
+                'equation': equation + ' 0' + val
+            })
+        } else {
+            this.setState({
+                'equation': equation + val
+            })
+        }
+    }
     
     pressButton(e) {
         const equation = this.state.equation;
@@ -106,16 +124,19 @@ class Calculator extends React.Component {
                 'equation': '0'
             });
 
+        } else if (val.match(/\./)) {
+          
+            this.handleDecimal(val, equation);    
+
         } else if (val.match(/[0-9]/)) {
 
             this.handleDigits(val, equation);
 
-        } else if (val.match(/[+\*-\/]/)){
+        } else if (val.match(/[+\*\-\/]/)){
 
             this.handleOperator(val, equation);          
 
         }  else {
-
 
             this.setState({
                 equation: equation + val
