@@ -70,52 +70,55 @@ class Calculator extends React.Component {
     }
 
 
-    handleDigits(e) {
-        if (this.state.equation === '0') {
+    handleDigits(val, equation) {
+        if (equation === '0') {
             this.setState ({
-                'equation': e.target.value
+                'equation': val
             });
 
         } else {
 
             this.setState({
-                equation: this.state.equation + e.target.value
+                equation: equation + val
             });
         }
     }
 
-    handleOperator(e) {
-        if (lastCharIsOperator(this.state.equation)) {
+    handleOperator(val, equation) {
+        if (lastCharIsOperator(equation)) {
             this.setState({
-                'equation': this.state.equation.slice(0, this.state.equation.length - 1) + e.target.value
+                'equation': equation.slice(0, equation.length - 1) + val
             });
         } else {
             this.setState({
-                'equation': this.state.equation + ' ' + e.target.value
+                'equation': equation + ' ' + val
             });
         }
     }
     
     pressButton(e) {
-        if (e.target.value === "clear") {
+        const equation = this.state.equation;
+        const val = e.target.value;
+
+        if (val === "clear") {
 
             this.setState({
                 'equation': '0'
             });
 
-        } else if (e.target.value.match(/[0-9]/)) {
+        } else if (val.match(/[0-9]/)) {
 
-            this.handleDigits(e);
+            this.handleDigits(val, equation);
 
-        } else if (e.target.value.match(/[+\*-\/]/)){
+        } else if (val.match(/[+\*-\/]/)){
 
-            this.handleOperator(e);          
+            this.handleOperator(val, equation);          
 
         }  else {
 
 
             this.setState({
-                equation: this.state.equation + e.target.value
+                equation: equation + val
             });
         }
 
