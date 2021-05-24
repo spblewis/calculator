@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class KeyPad extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    handleClick = (value) => {
+        this.props.pressButton(value);
+    }
 
     render() {
 
@@ -13,30 +20,20 @@ class KeyPad extends React.Component {
                 <button id="clear">AC</button>
                 <button id="divide">/</button>
                 <button id="multiply">*</button>               
-
                 <button id="seven">7</button>
                 <button id="eight">8</button>
                 <button id="nine">9</button>
                 <button id="subtract">-</button> 
-
-
-
                 <button id="four">4</button>
                 <button id="five">5</button>
                 <button id="six">6</button>
                 <button id="add">+</button>
-
-                <button id="one">1</button>
+                <button id="one" onClick={this.handleClick(1)}>1</button>
                 <button id="two">2</button>
                 <button id="three">3</button>
-
-
                 <button id="zero">0</button>
                 <button id="decimal">.</button>                
                 <button id="equals">=</button>
-
-
-                
 
             </div>
 
@@ -60,20 +57,27 @@ class Calculator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            equation: '0'
-        }
+            'equation': '0'
+        };
+        this.pressButton = this.pressButton.bind(this);
     }
 
+    pressButton(value) {
+        this.setState({
+            equation: this.state.equation + value
+        });
+    }
 
-
-    render(){
+    render() {
 
     return (
         <div id="calculator">
             <Display 
                 equation={this.state.equation}
             />
-            <KeyPad />
+            <KeyPad 
+                pressButton={this.pressButton}
+            />
         </div>
     );
 
