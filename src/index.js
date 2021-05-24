@@ -107,6 +107,12 @@ class Calculator extends React.Component {
             this.setState({
                 'equation': equation + ' 0' + val
             })
+
+            //Need this to work on numbers like: 2.3.4, etc...
+        } else if (equation[equation.length-1] === '.') {
+
+            return;
+        
         } else {
             this.setState({
                 'equation': equation + val
