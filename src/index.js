@@ -2,6 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+    function lastCharIsOperator(str) {
+        return str[str.length-1].match(/[+\*-\/]/);
+    }
+
+
 class KeyPad extends React.Component {
     constructor(props) {
         super(props);
@@ -60,30 +65,53 @@ class Calculator extends React.Component {
             'equation': '0'
         };
         this.pressButton = this.pressButton.bind(this);
-    
+        this.handleDigits = this.handleDigits.bind(this);
+        this.handleOperator = this.handleOperator.bind(this);
+    }
+
+
+    handleDigits(e) {
+        if (this.state.equation === '0') {
+            this.setState ({
+                'equation': e.target.value
+            });
+
+        } else {
+
+            this.setState({
+                equation: this.state.equation + e.target.value
+            });
+        }
+    }
+
+    handleOperator(e) {
+        if (lastCharIsOperator(this.state.equation)) {
+            this.setState({
+                'equation': this.state.equation.slice(0, this.state.equation.length - 1) + e.target.value
+            });
+        } else {
+            this.setState({
+                'equation': this.state.equation + ' ' + e.target.value
+            });
+        }
     }
     
     pressButton(e) {
         if (e.target.value === "clear") {
+
             this.setState({
                 'equation': '0'
-            })
+            });
+
         } else if (e.target.value.match(/[0-9]/)) {
-            if (this.state.equation === '0') {
-                this.setState ({
-                    'equation': e.target.value
-                })
-            } else {
 
-                this.setState({
-                    equation: this.state.equation + e.target.value
-                });
-            }
+            this.handleDigits(e);
 
-            
+        } else if (e.target.value.match(/[+\*-\/]/)){
 
+            this.handleOperator(e);          
 
-        } else {
+        }  else {
 
 
             this.setState({
