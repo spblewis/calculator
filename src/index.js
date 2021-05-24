@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-    function lastCharIsOperator(str) {
-        return str[str.length-1].match(/[+\*\-\/]/);
-    }
+const regexOperator = /[+\*\-\/]/;
+
+function lastCharIsOperator(str) {
+    return str[str.length-1].match(regexOperator);
+}
 
 
 class KeyPad extends React.Component {
@@ -72,15 +74,21 @@ class Calculator extends React.Component {
 
     handleDigits(val, equation) {
         if (equation === '0') {
-            this.setState ({
+            this.setState({
                 'equation': val
             });
 
-        } else if (lastCharIsOperator(equation)) {
+        }  else if (equation.match(/[+\*\-\/] -$/)) {
+            this.setState({
+                'equation': equation + val
+            });
+        } 
+        
+        else if (lastCharIsOperator(equation)) {
         
             this.setState({
                 'equation': equation + ' ' + val
-            })
+            });
         
         } else {
 
@@ -91,10 +99,20 @@ class Calculator extends React.Component {
     }
 
     handleOperator(val, equation) {
-        if (lastCharIsOperator(equation)) {
+
+        if (equation.match(/[+\*\-\/] -$/)) {
+            if (val === '-') {
+                return;
+            } else {
+                this.setState({
+                    'equation': equation.slice(0, equation.length - 3) + val
+                })
+            }
+        } else if (lastCharIsOperator(equation) && val !== '-') {
             this.setState({
                 'equation': equation.slice(0, equation.length - 1) + val
             });
+
         } else {
             this.setState({
                 'equation': equation + ' ' + val
@@ -103,13 +121,17 @@ class Calculator extends React.Component {
     }
 
     handleDecimal(val, equation) {
-        if (lastCharIsOperator(equation)) {
+
+        if (equation[equation.length-1] === '-') {
+            this.setState({
+                'equation': equation + '0' + val
+            })
+        } else if (lastCharIsOperator(equation)) {
             this.setState({
                 'equation': equation + ' 0' + val
             })
 
-            //Need this to work on numbers like: 2.3.4, etc...
-        } else if (equation[equation.length-1] === '.') {
+        } else if (equation.match(/\d+\.\d*$/)) {
 
             return;
         
@@ -123,6 +145,8 @@ class Calculator extends React.Component {
     calculate(equation) {
 
         let solving = equation.split(' ');
+
+        console.log(solving);
 
         for (let i = 0; i < solving.length; i++) {
             if (solving[i] === '*') {
