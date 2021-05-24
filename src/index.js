@@ -15,25 +15,25 @@ class KeyPad extends React.Component {
 
         return (
 
-            <div id="key-pad">
+            <div id="key-pad" onClick={this.handleClick}>
 
-                <button id="clear">AC</button>
-                <button id="divide">/</button>
-                <button id="multiply">*</button>               
-                <button id="seven">7</button>
-                <button id="eight">8</button>
-                <button id="nine">9</button>
-                <button id="subtract">-</button> 
-                <button id="four">4</button>
-                <button id="five">5</button>
-                <button id="six">6</button>
-                <button id="add">+</button>
-                <button id="one" onClick={this.handleClick} value='1'>1</button>
-                <button id="two">2</button>
-                <button id="three">3</button>
-                <button id="zero">0</button>
-                <button id="decimal">.</button>                
-                <button id="equals">=</button>
+                <button id="clear" value="clear">AC</button>
+                <button id="divide" value="/">/</button>
+                <button id="multiply" value="*">*</button>               
+                <button id="seven" value="7">7</button>
+                <button id="eight" value="8">8</button>
+                <button id="nine" value="9">9</button>
+                <button id="subtract" value="-">-</button> 
+                <button id="four" value="4">4</button>
+                <button id="five" value="5">5</button>
+                <button id="six" value="6">6</button>
+                <button id="add" value="+">+</button>
+                <button id="one" value="1">1</button>
+                <button id="two" value="2">2</button>
+                <button id="three" value="3">3</button>
+                <button id="zero" value="0">0</button>
+                <button id="decimal" value=".">.</button>                
+                <button id="equals" value="=">=</button>
 
             </div>
 
@@ -64,9 +64,17 @@ class Calculator extends React.Component {
     }
     
     pressButton(e) {
-        this.setState({
-            equation: this.state.equation + e.target.value
-        });
+        if (e.target.value === "clear") {
+            this.setState({
+                'equation': '0'
+            })
+        } else {
+
+            this.setState({
+                equation: this.state.equation + e.target.value
+            });
+        }
+
     }
 
 
@@ -82,7 +90,6 @@ class Calculator extends React.Component {
                 <KeyPad 
                     pressButton={this.pressButton}
                 />
-                <button id="dummy" onClick={this.pressButton}>Dummy button</button>
             </div>
         );
 
