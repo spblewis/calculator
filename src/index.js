@@ -113,6 +113,40 @@ class Calculator extends React.Component {
             })
         }
     }
+
+    calculate(equation) {
+
+        let solving = equation.split(' ');
+
+        for (let i = 0; i < solving.length; i++) {
+            if (solving[i] === '*') {
+                solving[i-1] = String(+solving[i-1] * +solving[i+1]);
+                solving.splice(i, 2);
+                i--;
+            } else if (solving[i] === '/') {
+                solving[i-1] = String(+solving[i-1] / +solving[i+1]);
+                solving.splice(i, 2);
+                i--;
+            }
+        }
+
+        for (let i = 0; i < solving.length; i++) {
+            if (solving[i] === '+') {
+                solving[i-1] = String(+solving[i-1] + +solving[i+1]);
+                solving.splice(i, 2);
+                i--;
+            } else if (solving[i] === '-') {
+                solving[i-1] = String(+solving[i-1] - +solving[i+1]);
+                solving.splice(i, 2);
+                i--;
+            }
+        }
+
+        this.setState({
+            'equation': solving[0]
+        });
+
+    }
     
     pressButton(e) {
         const equation = this.state.equation;
@@ -136,11 +170,10 @@ class Calculator extends React.Component {
 
             this.handleOperator(val, equation);          
 
-        }  else {
+        } else if (val.match(/=/)) {
 
-            this.setState({
-                equation: equation + val
-            });
+            this.calculate(equation);
+            
         }
 
     }
