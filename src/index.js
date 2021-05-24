@@ -68,7 +68,23 @@ class Calculator extends React.Component {
             this.setState({
                 'equation': '0'
             })
+        } else if (e.target.value.match(/[0-9]/)) {
+            if (this.state.equation === '0') {
+                this.setState ({
+                    'equation': e.target.value
+                })
+            } else {
+
+                this.setState({
+                    equation: this.state.equation + e.target.value
+                });
+            }
+
+            
+
+
         } else {
+
 
             this.setState({
                 equation: this.state.equation + e.target.value
